@@ -62,7 +62,6 @@ class API:
             album_name = None
             artist = None
             name = None
-            duration = None
             resobj = res.json()
             if resobj.get("item"):
                 playing = False
@@ -74,18 +73,15 @@ class API:
                     artist = resobj["item"]["artists"][0]["name"]
                 if resobj["item"].get("name"):
                     name = resobj["item"]["name"]
-                if resobj["item"].get("duration_ms"):
-                    duration = resobj["item"]["duration_ms"] / 1000
-                return (name, artist, album_name, playing, duration)
+                return (name, artist, album_name, playing)
             else:
                 return (None, None, None, False)
         else:
             return (None, None, None, False)
 
     def set_now_playing(self):
-        song, artist, album, playing, duration = self.get_current_playing_song()
+        song, artist, album, playing = self.get_current_playing_song()
         for workspace in self.slack_workspace_tokens:
-            print(playing)
             if not playing:
                 if self.current_song == "Not Playing Anything":
                     pass
@@ -109,8 +105,7 @@ class API:
                     )
             else:
                 status = self.format.replace(
-                    "artist", artist).replace("song", song)
-                print(duration)
+                    "artist", artist).replace("song", song).replace("album", album)
                 if self.current_song != status:
                     self.current_song = status
                     show_music("Now Playing: " + status)

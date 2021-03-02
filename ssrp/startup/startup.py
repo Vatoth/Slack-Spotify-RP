@@ -1,7 +1,9 @@
-import webbrowser, os, json
+import webbrowser
+import os
+import json
 from getpass import getpass
 from colorama import Fore as f
-from utils.colors import *
+from ssrp.utils.colors import *
 
 DEFAULT_CONFIG = {
     "spotify_auth_token": "NONE",
