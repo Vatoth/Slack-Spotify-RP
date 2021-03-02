@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "slack-spotify-rp"
+version = "0.1.0"
+description = ""
+authors = ["Max Bridgland"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+colorama = "0.4.1"
+requests = "2.20.1"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
