@@ -1,7 +1,8 @@
-from startup import startup
-from api import API
-from utils.colors import prompt
-import os, time
+import os
+import time
+from ssrp.startup import startup
+from ssrp.api import API
+from ssrp.utils.colors import prompt
 
 
 def main():

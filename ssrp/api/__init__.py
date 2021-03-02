@@ -2,7 +2,7 @@ import requests
 import json
 import os
 import time
-from utils.colors import *
+from ssrp.utils.colors import *
 
 
 class API:
@@ -108,7 +108,8 @@ class API:
                         },
                     )
             else:
-                status = self.format.replace("artist", artist).replace("song", song)
+                status = self.format.replace(
+                    "artist", artist).replace("song", song)
                 print(duration)
                 if self.current_song != status:
                     self.current_song = status
