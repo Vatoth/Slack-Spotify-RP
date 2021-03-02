@@ -1,7 +1,8 @@
-from ssrp.startup import startup
-from ssrp.api import API
-from ssrp.utils.colors import prompt
+from startup import startup
+from api import API
+from utils.colors import prompt
 import os, time
+
 
 def main():
     startup.check_config()
@@ -15,6 +16,7 @@ def main():
         prompt("Quitting... Unsetting Status")
         api.unset_status()
         exit()
-    
+
+
 if __name__ == "__main__":
     main()

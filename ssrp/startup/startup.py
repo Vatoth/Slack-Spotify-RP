@@ -1,7 +1,7 @@
 import webbrowser, os, json
 from getpass import getpass
 from colorama import Fore as f
-from ssrp.utils.colors import *
+from utils.colors import *
 
 DEFAULT_CONFIG = {
     "spotify_auth_token": "NONE",
@@ -10,17 +10,19 @@ DEFAULT_CONFIG = {
     "update_interval": 5,
     "format": "song - artist | [album]",
     "version": "1.0.1",
-    "auto_update": True
+    "auto_update": True,
 }
 CONFIG_DIR = os.path.realpath(os.path.expanduser("~") + "/.ssrp/")
 CONFIG_FILE = os.path.realpath(os.path.expanduser("~") + "/.ssrp/config.json")
+
 
 def check_config():
     if not os.path.exists(CONFIG_DIR):
         os.makedirs(CONFIG_DIR)
     if not os.path.exists(CONFIG_FILE):
         setup_wizard()
-        
+
+
 def setup_wizard():
     tprompt = "> "
     info("Press ENTER to login to Spotify/Slack to Get Started or Ctrl+C to Quit!")
@@ -44,7 +46,9 @@ def setup_wizard():
         else:
             pass
     while True:
-        prompt("Please Enter The Spotify Refresh Token Displayed on The Page When Done:")
+        prompt(
+            "Please Enter The Spotify Refresh Token Displayed on The Page When Done:"
+        )
         spot_re = input(tprompt)
         info("You Input: " + spot_re)
         prompt("Is this correct? Y\\n")
@@ -72,8 +76,12 @@ def setup_wizard():
             while True:
                 warning("You must login to your other workspace FIRST!")
                 getpass("Press ENTER to Continue")
-                webbrowser.open_new_tab("https://slack.com/oauth/authorize?scope=users:write&client_id=1014188996113.1014189480129")
-                prompt("Please Enter The Slack Auth Token Displayed on The Page When Done:")
+                webbrowser.open_new_tab(
+                    "https://slack.com/oauth/authorize?scope=users:write&client_id=1014188996113.1014189480129"
+                )
+                prompt(
+                    "Please Enter The Slack Auth Token Displayed on The Page When Done:"
+                )
                 slack_ans = input(tprompt)
                 info("You Input: " + slack_ans)
                 prompt("Is this correct? Y\\n")
@@ -91,9 +99,9 @@ def setup_wizard():
         info("Creating Configuration File...")
         with open(CONFIG_FILE, "w+") as cf:
             config = DEFAULT_CONFIG
-            config['spotify_auth_token'] = spot_at.strip()
-            config['spotify_refresh_token'] = spot_re.strip()
-            config['slack_workspaces'] = slack_at
+            config["spotify_auth_token"] = spot_at.strip()
+            config["spotify_refresh_token"] = spot_re.strip()
+            config["slack_workspaces"] = slack_at
             json.dump(config, cf, indent=4)
         info("Finished Creating Config File...")
     else:
